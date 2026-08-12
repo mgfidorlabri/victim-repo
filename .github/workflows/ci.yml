@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [alpha, beta, gamma]
+    steps:
+      - name: run ${{ matrix.variant }}
+        run: |
+          echo "building ${{ matrix.variant }}"
+          if [ "${{ matrix.variant }}" = "beta" ]; then echo "boom"; exit 1; fi
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "unit tests ok"
