@@ -8,13 +8,28 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        variant: [alpha, beta, gamma]
+        variant: [alpha, beta]
     steps:
-      - name: run ${{ matrix.variant }}
-        run: |
-          echo "building ${{ matrix.variant }}"
-          if [ "${{ matrix.variant }}" = "beta" ]; then echo "boom"; exit 1; fi
-  unit:
+      - run: echo "build ${{ matrix.variant }}"; [ "${{ matrix.variant }}" = "beta" ] && exit 1 || true
+  tests:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "unit tests ok"
+      - name: make junit
+        run: |
+          cat > junit.xml <<'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <testsuites>
+            <testsuite name="sectest.suite" tests="2" failures="1" errors="0" time="0.1">
+              <testcase classname="sectest.module" name="test_passes" time="0.01"/>
+              <testcase classname="sectest.module" name="test_idor_marker" time="0.02">
+                <failure message="AssertionError: SENSITIVE_MARKER_ABC123">SENSITIVE_MARKER_ABC123 stacktrace</failure>
+              </testcase>
+            </testsuite>
+          </testsuites>
+          EOF
+      - name: install mergify
+        run: pip install mergify-cli
+      - name: upload
+        env:
+          MERGIFY_TOKEN: ${{ secrets.MERGIFY_TOKEN }}
+        run: mergify ci junit-upload --test-framework pytest --test-language python junit.xml || true
