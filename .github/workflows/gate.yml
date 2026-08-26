@@ -1,9 +1,0 @@
-name: gate
-on: pull_request
-jobs:
-  ci-gate:
-    if: ${{ false }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo never
-
