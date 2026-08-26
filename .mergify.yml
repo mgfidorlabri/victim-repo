@@ -1,6 +1,0 @@
-pull_request_rules:
-  - name: automerge
-    conditions: [base=main, "check-success=ci-gate"]
-    actions:
-      merge:
-        method: merge
