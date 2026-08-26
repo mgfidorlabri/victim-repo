@@ -1,8 +1,7 @@
 pull_request_rules:
-  - name: automerge
+  - name: watch
     conditions:
       - base=main
-      - "#approved-reviews-by>=1"
     actions:
-      merge:
-        method: merge
+      comment:
+        message: watching
