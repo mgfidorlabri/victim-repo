@@ -1,7 +1,0 @@
-pull_request_rules:
-  - name: watch
-    conditions:
-      - base=main
-    actions:
-      comment:
-        message: watching
