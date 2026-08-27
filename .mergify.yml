@@ -1,11 +1,22 @@
-pull_request_rules:
-  - name: bb static username reuse protected merge
+commands_restrictions:
+  queue:
     conditions:
-      - title = bb-static-username-reuse-protected-merge-20260827
+      - sender = @bb-queue-authorizers-20260827
+
+pull_request_rules:
+  - name: bb queue-gated team authorization approval
+    conditions:
+      - queue-name = username-reuse-command-acl
     actions:
       review:
         type: APPROVE
-        message: BB stale OAuth protected approval 20260827
-        bot_account: researcher-intigriti
-      merge:
-        method: merge
+        message: BB queue-gated team authorization approval 20260827
+        bot_account: researcher-intigriti-bbtmp2-20260827
+
+queue_rules:
+  - name: username-reuse-command-acl
+    queue_conditions:
+      - title = bb-team-cache-queue-20260827
+    merge_conditions: []
+    merge_method: merge
+    branch_protection_injection_mode: merge
