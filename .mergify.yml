@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: Auto-merge approved PRs
+    conditions:
+      - "#approved-reviews-by>=2"
+      - base=main
+    conditions:
+      - base=main
+    actions:
+      queue:
+        name: default
