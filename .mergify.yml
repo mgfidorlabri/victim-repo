@@ -1,6 +1,0 @@
-queue_rules:
-  - name: revoked-secret-proof
-    queue_conditions:
-      - current-datetime >= 2026-08-27T13:55:11[Africa/Casablanca]
-    merge_conditions: []
-
