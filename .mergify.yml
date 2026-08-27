@@ -1,8 +1,0 @@
-pull_request_rules:
-  - name: bb username reuse merge proof
-    conditions:
-      - title = bb-username-reuse-merge-20260827
-    actions:
-      merge:
-        method: squash
-        merge_bot_account: "{{ author }}"
