@@ -1,0 +1,7 @@
+queue_rules:
+  - name: revoked-command-probe
+    queue_conditions:
+      - label = revocation-probe
+    merge_conditions:
+      - label = never-merge-revocation-probe
+
