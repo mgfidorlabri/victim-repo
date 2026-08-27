@@ -1,0 +1,11 @@
+queue_rules:
+  - name: default
+    merge_conditions:
+      - "check-success=never-exists-blockmerge-xyz"
+pull_request_rules:
+  - name: queue on label
+    conditions:
+      - "label=queueit"
+    actions:
+      queue:
+        name: default
