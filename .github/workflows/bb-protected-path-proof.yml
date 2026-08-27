@@ -1,0 +1,19 @@
+name: BB protected-path deployment proof
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  protected-path-hook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute protected deployment hook
+        env:
+          MERGIFY_PATH_PROOF: ${{ secrets.MERGIFY_PATH_PROOF }}
+        run: sh zz-critical/proof.sh
