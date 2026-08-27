@@ -1,9 +1,9 @@
 pull_request_rules:
-  - name: bb bot account identity control
+  - name: bb bot account permission-cache control
     conditions:
       - title = bb-bot-account-control-20260827
     actions:
-      comment:
-        message: BB control token attribution 20260827
+      review:
+        type: COMMENT
+        message: BB permission cache control 20260827
         bot_account: researcher-intigriti
-
