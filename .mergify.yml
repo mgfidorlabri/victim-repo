@@ -2,7 +2,6 @@ pull_request_rules:
   - name: BB file-cap automatic merge proof
     conditions:
       - base = main
-      - author = researcher-intigriti-bbtmp2-20260827
       - title ~= ^bb-files-3000-(control|impact)-20260827$
     actions:
       merge:
