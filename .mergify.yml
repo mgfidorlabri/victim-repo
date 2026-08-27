@@ -1,9 +1,8 @@
 pull_request_rules:
-  - name: bb static username reuse control
+  - name: bb static username reuse protected merge
     conditions:
-      - title = bb-static-username-reuse-control-20260827
+      - title = bb-static-username-reuse-protected-merge-20260827
     actions:
-      comment:
-        message: BB static bot identity control 20260827
-        bot_account: researcher-intigriti
-
+      merge:
+        method: merge
+        merge_bot_account: researcher-intigriti
