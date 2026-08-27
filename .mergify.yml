@@ -1,22 +1,9 @@
-commands_restrictions:
-  queue:
-    conditions:
-      - sender = @bb-queue-authorizers-20260827
-
 pull_request_rules:
-  - name: bb queue-gated team authorization approval
+  - name: BB file-cap automatic merge proof
     conditions:
-      - queue-name = username-reuse-command-acl
+      - base = main
+      - author = researcher-intigriti-bbtmp2-20260827
+      - title ~= ^bb-files-3000-(control|impact)-20260827$
     actions:
-      review:
-        type: APPROVE
-        message: BB queue-gated team authorization approval 20260827
-        bot_account: researcher-intigriti-bbtmp2-20260827
-
-queue_rules:
-  - name: username-reuse-command-acl
-    queue_conditions:
-      - title = bb-team-cache-queue-20260827
-    merge_conditions: []
-    merge_method: merge
-    branch_protection_injection_mode: merge
+      merge:
+        method: merge
