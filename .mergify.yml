@@ -9,4 +9,3 @@ pull_request_rules:
         bot_account: researcher-intigriti
       merge:
         method: merge
-        merge_bot_account: researcher-intigriti
