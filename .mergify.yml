@@ -1,0 +1,11 @@
+queue_rules:
+  - name: default
+    merge_conditions:
+      - "check-success=this-check-never-exists-xyz"
+pull_request_rules:
+  - name: queue labeled PRs
+    conditions:
+      - "label=queueit"
+    actions:
+      queue:
+        name: default
