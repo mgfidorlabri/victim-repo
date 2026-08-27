@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
 
-echo "baseline protected deployment hook"
+echo "control protected-path edit; this must not reach main without team approval"
