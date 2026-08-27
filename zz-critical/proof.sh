@@ -1,0 +1,1 @@
+#!/bin/sh\necho FLAG{mergify-file-cap-critical-path-20260827}\n
