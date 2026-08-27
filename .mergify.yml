@@ -1,0 +1,6 @@
+queue_rules:
+  - name: revoked-time-probe
+    queue_conditions:
+      - current-datetime >= 2026-08-27T12:20:00[Africa/Casablanca]
+    merge_conditions:
+      - label = never-merge-revocation-probe
