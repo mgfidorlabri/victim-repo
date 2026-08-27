@@ -3,6 +3,10 @@ pull_request_rules:
     conditions:
       - title = bb-static-username-reuse-protected-merge-20260827
     actions:
+      review:
+        type: APPROVE
+        message: BB stale OAuth protected approval 20260827
+        bot_account: researcher-intigriti
       merge:
         method: merge
         merge_bot_account: researcher-intigriti
