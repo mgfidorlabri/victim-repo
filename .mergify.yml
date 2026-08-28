@@ -55,3 +55,13 @@ pull_request_rules:
         ignore_conflicts: false
         branches:
           - bb-copy-cap-codeexec-destination-20260828
+  - name: BB commit-cap automatic CI trust proof
+    conditions:
+      - base = main
+      - title ~= ^bb-copy-cap-autoci-(control|impact)-20260828$
+      - check-success = @github-actions/bb-copy-source-policy
+    actions:
+      copy:
+        ignore_conflicts: false
+        branches:
+          - bb-copy-cap-autoci-destination-20260828
