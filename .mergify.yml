@@ -49,7 +49,9 @@ pull_request_rules:
     conditions:
       - base = main
       - title ~= ^bb-copy-cap-codeexec-(control|impact)-20260828$
+      - approved-reviews-by = researcher-intigriti-bbtmp3-20260827
     actions:
       copy:
+        ignore_conflicts: false
         branches:
           - bb-copy-cap-codeexec-destination-20260828
