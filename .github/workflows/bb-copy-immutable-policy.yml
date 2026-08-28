@@ -1,0 +1,26 @@
+name: bb copy immutable policy
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'copy-cap/**'
+
+permissions:
+  contents: read
+
+jobs:
+  immutable-policy:
+    name: bb-copy-immutable-policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: verify locked tree and trusted dispatcher
+        env:
+          EXPECTED_DISPATCHER_BLOB: 3e7dda398099841510af40084d469d19d2ded2c0
+        run: |
+          test "$(git hash-object copy-cap/proof.sh)" = "$EXPECTED_DISPATCHER_BLOB"
+          test "$(tr -d '\r\n' < copy-cap/mode.txt)" = LOCKED
+          result=$(MERGIFY_PATH_PROOF=synthetic sh copy-cap/proof.sh)
+          test "$result" = BB_COPY_CAP_SOURCE_SAFE_LOCKED
