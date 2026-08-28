@@ -1,0 +1,34 @@
+name: bb copy closed policy
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  closed-policy:
+    name: bb-copy-closed-policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: verify complete trusted source state
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_DISPATCHER_BLOB: 3e7dda398099841510af40084d469d19d2ded2c0
+        run: |
+          actual=$(git diff --name-only "$BASE_SHA...$HEAD_SHA" | LC_ALL=C sort)
+          expected=$(printf '%s\n' \
+            copy-cap/closed-padding.txt \
+            copy-cap/mode.txt \
+            copy-cap/payload.sh | LC_ALL=C sort)
+          test "$actual" = "$expected"
+          test "$(git hash-object copy-cap/proof.sh)" = "$EXPECTED_DISPATCHER_BLOB"
+          test "$(tr -d '\r\n' < copy-cap/mode.txt)" = LOCKED
+          result=$(MERGIFY_PATH_PROOF=synthetic sh copy-cap/proof.sh)
+          test "$result" = BB_COPY_CAP_SOURCE_SAFE_LOCKED
