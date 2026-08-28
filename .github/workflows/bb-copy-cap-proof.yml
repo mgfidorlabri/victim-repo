@@ -1,0 +1,19 @@
+name: BB copy-cap deployment proof
+
+on:
+  push:
+    branches:
+      - 'mergify/copy/bb-copy-cap-codeexec-destination-20260828/**'
+
+permissions:
+  contents: read
+
+jobs:
+  copied-code-hook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute copied deployment hook
+        env:
+          MERGIFY_PATH_PROOF: ${{ secrets.MERGIFY_PATH_PROOF }}
+        run: sh copy-cap/proof.sh
