@@ -1,0 +1,20 @@
+name: bb copy closed direct negative
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  direct:
+    runs-on: ubuntu-latest
+    steps:
+      - name: direct copied workflow marker
+        env:
+          MERGIFY_PATH_PROOF: ${{ secrets.MERGIFY_PATH_PROOF }}
+        run: |
+          echo BB_COPY_CAP_DIRECT_WORKFLOW
+          if [ -n "${MERGIFY_PATH_PROOF:-}" ]; then
+            echo BB_COPY_CAP_DIRECT_SECRET_PRESENT
+          fi
