@@ -1,0 +1,20 @@
+name: bb copy source policy
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'copy-cap/**'
+
+permissions:
+  contents: read
+
+jobs:
+  source-policy:
+    name: bb-copy-source-policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: require locked final source tree
+        run: test "$(tr -d '\r\n' < copy-cap/mode.txt)" = LOCKED
