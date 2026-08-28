@@ -14,3 +14,26 @@ pull_request_rules:
     actions:
       merge:
         method: merge
+  - name: BB review head-binding approval proof
+    conditions:
+      - base = bb-review-race-protected-20260828
+      - title ~= ^bb-review-race-(control|impact)-20260828$
+      - files ~= ^docs/review-race/
+      - not: 'files ~= ^commit-cap/'
+    actions:
+      copy:
+        branches:
+          - bb-review-delay-a-20260828
+          - bb-review-delay-b-20260828
+      review:
+        type: APPROVE
+        message: BB review head binding 20260828
+        bot_account: researcher-intigriti-bbtmp3-20260827
+  - name: BB review head-binding impact merge
+    conditions:
+      - base = bb-review-race-protected-20260828
+      - title = bb-review-race-impact-20260828
+      - '#approved-reviews-by >= 1'
+    actions:
+      merge:
+        method: merge
