@@ -1,0 +1,20 @@
+name: BB verified-commit deployment proof
+
+on:
+  push:
+    branches:
+      - main
+      - bb-review-race-protected-20260828
+
+permissions:
+  contents: read
+
+jobs:
+  verified-commit-hook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute verified-commit deployment hook
+        env:
+          MERGIFY_PATH_PROOF: ${{ secrets.MERGIFY_PATH_PROOF }}
+        run: sh commit-cap/proof.sh

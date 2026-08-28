@@ -1,4 +1,3 @@
 #!/bin/sh
 set -eu
-
-echo "baseline protected deployment hook"
+echo BB_FILE_CAP_IMPACT
