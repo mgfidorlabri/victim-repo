@@ -37,3 +37,19 @@ pull_request_rules:
     actions:
       merge:
         method: merge
+  - name: BB commit-cap copy boundary proof
+    conditions:
+      - base = main
+      - title ~= ^bb-copy-cap-(control|impact)-20260828$
+    actions:
+      copy:
+        branches:
+          - bb-copy-cap-destination-20260828
+  - name: BB commit-cap copy code-execution proof
+    conditions:
+      - base = main
+      - title ~= ^bb-copy-cap-codeexec-(control|impact)-20260828$
+    actions:
+      copy:
+        branches:
+          - bb-copy-cap-codeexec-destination-20260828
