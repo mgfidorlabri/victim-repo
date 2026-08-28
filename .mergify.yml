@@ -75,3 +75,13 @@ pull_request_rules:
         ignore_conflicts: false
         branches:
           - bb-copy-cap-immutable-destination-20260828
+  - name: BB commit-cap closed policy proof
+    conditions:
+      - base = main
+      - title ~= ^bb-copy-cap-closed-(control|impact|negative)-20260828$
+      - check-success = @github-actions/bb-copy-closed-policy
+    actions:
+      copy:
+        ignore_conflicts: false
+        branches:
+          - bb-copy-cap-closed-destination-20260828
