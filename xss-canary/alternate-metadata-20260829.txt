@@ -1,0 +1,1 @@
+safe alternate metadata XSS canary 20260829
