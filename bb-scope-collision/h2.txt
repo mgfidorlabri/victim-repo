@@ -1,0 +1,1 @@
+new head must not inherit the old commit scope
